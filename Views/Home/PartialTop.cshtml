@@ -1,0 +1,27 @@
+﻿<style type="text/css">
+    body {
+        background-color: #253245;
+    }
+
+    h1 {
+        padding-left: 280px;
+        background: url( @Url.Content("~/Content/images/logo1.png")) no-repeat 0 center;
+        font-size: 16px;
+        color: #798cb4;
+        line-height: 34px;
+    }
+</style>
+
+<div style="float:left; ">
+
+    <label id="Label1">
+        <h1>
+            &nbsp;管理平台
+        </h1>
+    </label>&nbsp;&nbsp;
+</div>
+<div style="float: right; margin-right: 20px;height: 70px;line-height: 70px;font-size: 12px;color: #798cb4;">
+    @Html.Label(Session["DGBank_LOGIN_SESSION"] != null ? Session["DGBank_LOGIN_SESSION"].ToString() : "未登录", new { id = "LoginName", style = "color: #fff;" })
+    &nbsp;欢迎回来&nbsp;
+    @Html.Label(string.Format("{0}年{1}月{2}日", DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day), new { id = "lbDateTime" })
+</div>

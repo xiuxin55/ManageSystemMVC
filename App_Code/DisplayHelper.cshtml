@@ -1,0 +1,46 @@
+﻿@helper FundCombineListDiply(List<DGBank.Entities.TblFundCombines> Model)
+{
+    var index = 0;
+    foreach (var item in Model)
+    {
+        <tr>
+            <td>@WebManager.Common.HelperConvert.GetSubStr(item.Name, 78) </td>
+            <td>@WebManager.Common.HelperConvert.GetOrgName(item.CombineType, item.OrgCode, 80)</td>
+            <td>@WebManager.Common.HelperConvert.DisplayFieldConv(item.DisplayField)</td>
+            <td>@WebManager.Common.HelperConvert.DisplayCombineType(item.CombineType)</td>
+            <td>@WebManager.Common.HelperConvert.GetRunDay(item.CreateDate)</td>
+            <td>
+                <input name="itemid" type="hidden" value="@item.Id">
+                <a href="javascript:void(0);" onclick="onclickHref(@item.Id,'edit',@item.DisplayOrder);">编辑</a>
+                <a href="javascript:void(0);" onclick="onclickHref(@item.Id,'del',@item.DisplayOrder);">删除</a>
+                @if (index == 0)
+                {
+                    <a>上移</a>
+                }
+                else
+                {
+                    <a href="javascript:void(0);" onclick="onclickHref(@item.Id,'moveup',@item.DisplayOrder)">上移</a>
+                }
+                @if (Model.Count == index + 1)
+                {
+                    <a>下移</a>
+                }
+                else
+                {
+                    <a href="javascript:void(0);" onclick="onclickHref(@item.Id,'movedown',@item.DisplayOrder);">下移</a>
+                }
+                @if (index == 0)
+                {
+                    <a>置顶</a>
+                }
+                else
+                {
+                    <a href="javascript:void(0);" onclick="onclickHref(@item.Id,'top',@item.DisplayOrder);">置顶</a>
+                }
+
+                <a href="javascript:void(0);" onclick="onclickHref(@item.Id,'history',@item.DisplayOrder)">历史</a>
+            </td>
+        </tr>
+                index++;
+    }
+}

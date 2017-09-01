@@ -1,0 +1,84 @@
+﻿@{
+    Layout = null;
+}
+@model  List<DGBank.Entities.TblFundCombines>
+@using WebManager.Common
+
+
+<div id="main">
+    <div style="overflow: hidden;">
+        <h3 class="add_tit">&nbsp;&nbsp;基金组合设置</h3>
+        <input type="button" value="添加" class="add_btn" />
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <td style="width:200px;">
+                    基金组合名称
+                </td>
+                <td style="width: 230px;">
+                    基金公司
+                </td>
+                <td style="width: 150px;">
+                    展示字段
+                </td>
+                <td style="width: 150px;">
+                    组合类型
+                </td>
+                <td style="width: 80px;">
+                    运行时间
+                </td>
+                <td style="width: 180px;">
+                    操作
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+           @DisplayHelper.FundCombineListDiply(Model)
+        </tbody>
+    </table>
+
+</div>
+
+@Scripts.Render("~/Scripts/ModalWindowJS.js")
+<script type="text/javascript">
+    function RecordsList(combinid) {
+        showwin("FundCombinesRecords.aspx?combinesId=" + combinid, 400, 500, true);
+    }
+    var isRequesting=false;
+    function onclickHref(Id, paramtype, DisplayOrder) {
+
+        if (isRequesting) {
+            return;
+        }
+        isRequesting=true;
+        var AllIds = "";
+        $("input[name='itemid']").each(function () {
+            AllIds+= $(this).val()+",";
+        });
+        var params = "{Id:'" + Id + "',paramtype:'" + paramtype + "',DisplayOrder:'" + DisplayOrder + "',AllIds:'" + AllIds + "'}";
+        $.ajax(
+           {
+               type: "POST",
+               url: "FundCombines/LinkOperate",
+               data: params,
+               dataType: "json",
+               contentType: "application/json;charset=utf-8",
+               success: function (data) {
+                   if (data.state=="success") {
+                       window.ReloadMain("FundCombines/FundCombinesList");
+                   }
+                   else {
+                       alert(data.message);
+                   }
+                   isRequesting=false;
+               },
+               error: function (e) {
+                   isRequesting=false;
+                   window.ReloadMain("FundCombines/FundCombinesList");
+                   window.ErrorHandle(e);
+               }
+           });
+    }
+</script>

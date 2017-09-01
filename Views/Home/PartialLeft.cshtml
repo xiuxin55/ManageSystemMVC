@@ -1,0 +1,42 @@
+﻿@model IEnumerable<WebManager.Models.MenuModel>
+@Styles.Render("~/Content/Left.css")
+<div class="arrowlistmenu">
+    @foreach (var item in Model)
+    {
+        <div>
+
+            <div style="color: #798cb4; font-size: 14px; padding-left: 20px; background: url(@Url.Content("~/Content/images/"+item.ImageUrl)) no-repeat 0 center;">
+                @item.Name
+            </div>
+            <ul class="categoryitems">
+                @foreach (var value in item.NextNode)
+                {
+                    <li>@Html.ActionLink(value.Name, value.ActionName, value.ControllerName,null, new { target = "mainframe", @class = "menuleft" })</li>
+                }
+
+            </ul>
+        </div>
+    }
+    @if (Model.Any())
+    {
+        <div>
+            <div style="color: #798cb4; font-size: 14px; padding-left: 20px; background: url(@Url.Content("~/Content/images/003.png")) no-repeat 0 center;">
+                账号设置
+            </div>
+            <ul class="categoryitems">
+                <li>@Html.ActionLink("更改密码", "ChangePassword", "Account", null, new { target = "mainframe" })</li>
+                <li>
+                    @Html.ActionLink("退出系统", "Exit", null, null, new { style = "color: #ffffff; text-decoration: none;", @class = "menuleft" })
+                </li>
+            </ul>
+        </div>
+    }
+</div>
+
+<script type="text/javascript">
+    $(".menuleft").on("click", function (event) {
+       
+        event.preventDefault();//使a自带的方法失效，即无法调整到href中的URL
+        window.ReloadMain($(event.target).attr("href"));
+    });
+</script>

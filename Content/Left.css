@@ -1,0 +1,29 @@
+﻿
+    body {
+        background-color: #253245;
+    }
+
+    .main {
+        margin: 12px 0px 8px 0px;
+    }
+
+    .categoryitems {
+        padding: 0;
+    }
+
+        .categoryitems > li {
+            list-style-type: none;
+            padding-left: 15px;
+            border-left: 5px solid #253245;
+        }
+
+            .categoryitems > li > a {
+                color: #ffffff;
+                line-height: 40px;
+                text-decoration: none;
+            }
+
+            .categoryitems > li:hover {
+                background-color: #3d4f6a;
+                border-left: 5px solid #1e81ff !important;
+            }

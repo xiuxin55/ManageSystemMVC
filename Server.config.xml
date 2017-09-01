@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <database>
+    <server>192.168.2.219</server>
+    <port>3306</port>
+    <database>dgbankdb</database>
+    <user_id>funduser</user_id>
+    <password>Cwm1UZnrI2uK7UBqMOMGpA==</password>
+    <show_sql>false</show_sql>
+  </database>
+</root>

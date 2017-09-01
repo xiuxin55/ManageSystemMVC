@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head id="Head1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    @Styles.Render("~/Content/index.css")
+    @Styles.Render("~/Content/FundCombine.css")
+    @Scripts.Render("~/Scripts/jquery-1.11.3.min.js")
+    <script type="text/javascript">
+        //$(function () {
+
+        //    function GetQueryString(name) {
+        //        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        //        var r = window.location.search.substr(1).match(reg);
+        //        if (r != null) return decodeURIComponent(r[2]); return null;
+        //    }
+        //    var mainurl = GetQueryString("mainurl");
+        //    if (mainurl != null && mainurl != "") {
+        //        $("#main").attr("src", mainurl)
+        //    }
+        //});
+        
+        $(function () {
+           
+            $.ajax({
+                url: "Home/PartialLeft",
+                type: "POST",
+                datatype: "json",
+                success: function (data) {
+                    $("#left").html(data);
+                }
+                ,
+                error: function (e) {
+                   // console.log("left");
+                    window.ErrorHandle(e);
+                }
+            });
+            $("#mainframe").load("Home/Welcome");
+            //$("#left").load("Home/PartialLeft");
+        });
+        window.ReloadMain = function (url) {
+            $.ajax({
+                type: "POST",
+                url:url,
+                datatype: "json",
+                success: function (data) {
+                    window.setMain(data);
+                },
+                error: function (e) {
+                    window.ErrorHandle(e);
+                }
+            });
+        }
+        window.setMain = function (data) {
+            $("#mainframe").html(data);
+        }
+        window.ErrorHandle = function (e) {
+           
+            alert('错误' + e.status + ',' + e.statusText);
+        }
+    </script>
+</head>
+
+    <body class="flat">
+        <table class="flat">
+            <tr style="height:80px;" class="flat">
+                <td colspan="2">
+                    <div id="top">
+                        @Html.Partial("PartialTop")
+                    </div>
+                </td>
+            </tr>
+            <tr class="flat">
+                <td style="width: 170px; position: relative;">
+                    <div id="left" style="top: 0px; position: absolute;">
+                       
+                    </div>
+                </td>
+                <td>
+                    <div class="flat" style="background: #fff;" id="mainframe">
+
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

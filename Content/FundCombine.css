@@ -1,0 +1,86 @@
+﻿
+#main {
+      width: 98%;
+            height: 100%;
+            margin: 0 auto;
+    background-color:#fff
+}
+
+/*#left {
+    float: left;
+    width: 200px;
+    text-align: left;
+    border: 1px solid #e6eeee;
+    height: 600px;
+    overflow: auto;
+}
+
+#right {
+    margin-left: 200px;
+    text-align: left;
+    border: 1px solid #e6eeee;
+    height: 600px;
+    overflow: auto;
+}*/
+
+.gridview {
+    font-family: Arial;
+    margin: 10px;
+    font-size: 12px;
+    border: 1px solid #e6eeee;
+}
+
+.add_tit {
+    margin-bottom: 16px;
+    padding-left: 16px;
+    font-size: 18px;
+    color: #191919;
+    border-left: 3px solid #8b78dc;
+}
+
+#main table {
+    margin: 0 0px;
+    border:1px solid #e6eeee; 
+    border-collapse:collapse;
+    width:100%;
+}
+
+.add_btn {
+    float: right;
+    width: 82px;
+    height: 24px;
+    margin-bottom: 26px;
+    background-color: #ef882d;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+    line-height: 24px;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+}
+
+#main th {
+    height: 44px;
+    text-align: center;
+
+}
+#main  td {
+    height: 44px;
+    text-align: center;
+    border:1px solid #e6eeee; 
+    background: #f0f0f0;
+}
+#main th {
+    border: 1px solid #f0f0f0;
+    background: #f0f0f0;
+}
+
+#main table tbody td {
+    background: none !important;
+    border:1px solid #e6eeee; 
+}
+
+#main tr:hover {
+    background-color: #f3f7fc;
+}

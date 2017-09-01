@@ -1,0 +1,189 @@
+﻿@{
+    ViewBag.Title = "东莞后台管理系统";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model WebManager.Models.LoginModel
+@Styles.Render("~/Content/login.css")
+@using (Ajax.BeginForm("LoginAction", "Account", FormMethod.Post, new AjaxOptions { HttpMethod = "POST", OnSuccess = "CompleteAjax" }))
+{ 
+<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td height="561">
+                        <table width="940" border="0" align="center" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td height="238" class="login">
+                                    &nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="190">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td width="208" height="190" style="">
+                                                &nbsp;
+                                            </td>
+                                            <td width="518" class="login03">
+                                                <table width="390" border="0" align="center" cellpadding="0" cellspacing="0">
+                                                    <tr style="height:22px;"></tr>
+                                                    <tr>
+                                                        <td width="105" height="50" style="font-size: 14px;">
+                                                            账 户：
+                                                        </td>
+                                                        <td width="170" height="50">
+                                                            <input name="UserName" id="UserName" style="width: 242px; background-repeat: repeat-x; height: 28px; line-height: 34px; border: solid 1px #d1d1d1; font-size: 9pt; font-family: Verdana, Geneva, sans-serif;" />
+                                                        </td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td height="50" width="105" style="font-size: 14px;">
+                                                            密 码：
+                                                        </td>
+                                                        <td height="50">
+                                                            <input name="UserPwd" id="UserPwd" type="password" style="width: 242px; height: 28px; line-height: 34px; background-repeat: repeat-x; border: solid 1px #d1d1d1; font-size: 9pt;"></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td height="50" width="105" style="font-size: 14px;">
+                                                            验证码：
+                                                        </td>
+                                                        <td height="50">
+                                                            <div>
+                                                                <input name="VerifyCode" id="VerifyCode" style="width: 167px; height: 28px; line-height: 34px; background-repeat: repeat-x; border: solid 1px #d1d1d1; font-size: 9pt;" /> 
+                                                                <img id="getcode" style="cursor: pointer; width: 69px; text-align: center; height: 31px; line-height: 34px; vertical-align: top;" class="col-md-2 control-label" src="~/Account/GetValidateCode" alt="验证码" />
+                                                             
+                                                            </div>
+                                                        </td>
+                                                        <td></td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td height="40">
+                                                            &nbsp;
+                                                        </td>
+
+                                                        <td height="60">
+                                                            <input value="" id="imgLogin" type="submit" style="border: 0px;width: 114px; height: 29px; cursor: pointer; background-image: url(@Url.Content("~/Content/images/loginBtn.png")); " />
+                                                        </td>
+                                                        <td></td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td width="214" style="">
+                                                &nbsp;
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="133">
+                                    &nbsp;
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+}
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            $("#getcode").bind('click', function () {
+                $("#getcode").attr("src", "@Url.Action("GetValidateCode", "Account")?time=" + (new Date()).getTime());
+            });
+
+        });
+        function CompleteAjax(param) {
+            if (param.messagetype == "ok") {
+                location.href = param.message;
+                return;
+            }
+            alert(param.message);
+            $("#getcode").attr("src", "@Url.Action("GetValidateCode", "Account")?time=" + (new Date()).getTime());
+        }
+        //function getPublicKey() {
+        //    var pubKey = '';
+        //    $.ajax({
+        //        type: "POST",
+        //        url:"<%=ResolveClientUrl("~/Account/Login.aspx") %>/GetRsaPublicKey",
+        //        contentType: "application/json;charset=utf-8",
+        //    async: false,
+        //    data: null,
+        //    dataType: "json",
+        //    success: function (data) {
+        //        if (data.d !=null) {
+        //            pubKey = data.d;
+        //            $.cookie('publicKey', pubKey, { expires: 1 / 1440 });
+        //        }
+        //    },
+        //    error: function (e) {
+        //        if (e.status==404) {
+        //            alert("404！无法访问");
+        //        }
+        //        else {
+        //            alert(e.responseText);
+        //        }
+        //    }
+        //});
+        //return pubKey;
+        //}
+        ////公钥加密用户密码Pwd为RSA加密后参数
+        //function rsaEncrypt(pwd) {
+        //    var publicKey = getPublicKey();
+        //    setMaxDigits(129);
+        //    var key = new RSAKeyPair(publicKey.split(",")[0], "", publicKey.split(",")[1]);
+        //    var pwdRtn = encryptedString(key, pwd);
+        //    return pwdRtn ;
+        //}
+        //POST登录请求，参数
+
+        //$(function () {
+        //    $('#imgLogin').bind('click', function () {
+        //        var uName = $('#TxtUser').val();
+        //        var pwd = $('#TxtPass').val();
+        //        if (uName == '') {
+        //            alert('用户名不能为空');
+        //            return;
+        //        }
+        //        if (pwd == '') {
+        //            alert('用户密码不能为空');
+        //            return;
+        //        }
+        //        var enPwd = rsaEncrypt(pwd);
+        //        if (enPwd=='') {
+        //            alert("无法获得密钥,登录失败");
+        //        }
+        //        $.ajax({
+        //            type: "POST",
+        //            url: "<%=ResolveClientUrl("~/Account/Login.aspx") %>/CheckLogin",
+        //            data:' { TxtUser: "'+uName+'", TxtPass:"'+ enPwd+'", verfycodetxt:"'+ $('#verfycodetxt').val()+'" }',
+        //        contentType: "application/json;charset=utf-8",
+        //        async: false,
+        //        dataType: "json",
+        //        success: function (data) {
+        //            if (data.d==null) {
+        //                alert("服务故障，无法登录");
+        //            }
+        //            if (data.d.result == true) {
+        //                window.location.href = "<%=ResolveClientUrl("~/Index.aspx") %>";
+        //                return false;
+        //            } else {
+        //                var randomnum = Math.random();
+        //                $("#getcode").attr("src","<%=ResolveClientUrl("~/Account/VerifyCode.aspx") %>/CheckLogin?" + randomnum);
+        //                alert(data.d.message);
+        //            }
+        //        },
+        //        error: function (e) {
+        //            alert(e.responseText);
+        //        }
+        //    });
+        //});
+        //})
+    </script>
+}

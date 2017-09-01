@@ -1,0 +1,497 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CYTX.Utility.Cache</name>
+    </assembly>
+    <members>
+        <member name="T:CYTX.Utility.Cache.RedisCacheClient">
+            <summary>
+            Redis缓存客户端API，本类的所有成员不是线程安全的，如果在多线程之间共用同一个RedisCacheClient对象，必须实现同步代码逻辑！
+            </summary>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.#ctor">
+            <summary>
+            使用默认配置信息初始化Redis缓存客户端API，本类的所有成员不是线程安全的，如果在多线程之间共用同一个RedisCacheClient对象，必须实现同步代码逻辑！
+            </summary>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.#ctor(CYTX.Utility.Cache.RedisConfigInfo)">
+            <summary>
+            Redis缓存客户端API，本类的所有成员不是线程安全的，如果在多线程之间共用同一个RedisCacheClient对象，必须实现同步代码逻辑！
+            </summary>
+            <param name="config">配置信息</param>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.#ctor(System.String)">
+            <summary>
+            使用默认配置信息初始化Redis缓存客户端API，本类的所有成员不是线程安全的，如果在多线程之间共用同一个RedisCacheClient对象，必须实现同步代码逻辑！
+            </summary>
+            <param name="prefix">缓存的前置KEY，最终的实际KEY由 前置KEY + 自定义KEY组成</param>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.#ctor(System.String,CYTX.Utility.Cache.RedisConfigInfo)">
+            <summary>
+            Redis缓存客户端API，本类的所有成员不是线程安全的，如果在多线程之间共用同一个RedisCacheClient对象，必须实现同步代码逻辑！
+            </summary>
+            <param name="prefix">缓存的前置KEY，最终的实际KEY由 前置KEY + 自定义KEY组成</param>
+            <param name="config">配置信息</param>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.CreateRedis">
+            <summary>
+            创建链接池管理对象
+            </summary>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.GetClient">
+            <summary>
+            客户端缓存操作对象
+            </summary>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.GetFullKey(System.String)">
+            <summary>
+            获取完整的缓存KEY
+            </summary>
+            <param name="key">自定义KEY</param>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.GetAllKeys">
+            <summary>
+            获取缓存中的所有键！
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.Remove(System.String)">
+            <summary>
+            删除指定的缓存项
+            </summary>
+            <param name="key">缓存键或某个HashId</param>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.Remove(System.Collections.Generic.ICollection{System.String})">
+            <summary>
+            删除指定的缓存项
+            </summary>
+            <param name="keyList">缓存键或某个HashId</param>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.AddHash(System.String,System.String,System.String)">
+            <summary>
+            添加到哈希表中
+            </summary>
+            <param name="hashId">哈希表ID</param>
+            <param name="key">哈希表Key</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.GetHash(System.String)">
+            <summary>
+            获取指定HashID的所有对象（key：对象的key值，value：对象的json串）
+            </summary>
+            <param name="hashId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.AddHash``1(System.String,System.String,``0)">
+            <summary>
+            添加到哈希表中
+            </summary>
+            <param name="hashId">哈希表ID</param>
+            <param name="key">哈希表Key</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.AddHash``2(System.String,System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            添加到哈希表中
+            </summary>
+            <typeparam name="K">字典键类型</typeparam>
+            <typeparam name="V">字典项类型</typeparam>
+            <param name="hashId">哈希表ID</param>
+            <param name="dict">字典对象</param>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.AddHash``1(System.String,System.String,System.Collections.Generic.IList{``0},System.String)">
+            <summary>
+            添加到哈希表中
+            </summary>
+            <typeparam name="T">保存列表类型</typeparam>
+            <param name="hashIdPrefix">hash表id前缀</param>
+            <param name="idPropertyName">hash表后缀属性名</param>
+            <param name="list">保存列表</param>
+            <param name="keyPropertyName">hash表中key的属性名</param>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.GetHashValues``1(System.String)">
+            <summary>
+            获取整个hash的数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="hashId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.GetHashValues``1(System.String,System.String)">
+            <summary>
+            获取整个hash的数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="hashId"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.GetHashValues(System.String,System.String)">
+            <summary>
+            获取整个hash的数据
+            </summary>
+            <param name="hashId"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.RemoveHash(System.String,System.String)">
+            <summary>
+            移除hash中的某值
+            </summary>
+            <param name="hashId"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.ExistHash``1(System.String,System.String)">
+            <summary>
+            判断某个数据是否已经被缓存
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="hashId"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.SetExpireHash(System.String,System.DateTime)">
+            <summary>
+            设置缓存过期
+            </summary>
+            <param name="hashId"></param>
+            <param name="dateTime"></param>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.GetHashKeys(System.String)">
+            <summary>
+            返回Hash中所有的Keys 
+            </summary>
+            <param name="hashId"></param>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.SearchKeys(System.String)">
+            <summary>
+            模糊搜索缓存键
+            </summary>
+            <param name="pattern">键名称的任意部分</param>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.Get(System.String)">
+            <summary>
+            获取指定的缓存项
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.Set(System.String,System.Object)">
+            <summary>
+            设置缓存项
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.Set``1(System.String,``0)">
+            <summary>
+            设置缓存项
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.Get``1(System.String)">
+            <summary>
+            获取指定的缓存项
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.ContainsKey(System.String)">
+            <summary>
+            检查指定KEY在缓存中是否存在
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.GetListCount(System.String)">
+            <summary>
+            返回指定列表的项数目
+            </summary>
+            <param name="key">列表键</param>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.AddListItem``1(System.String,``0)">
+            <summary>
+            添加指定的项到列表中
+            </summary>
+            <param name="key">列表键</param>
+            <param name="item">项目</param>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.RemoveListItem(System.String,System.Int32)">
+            <summary>
+            移除指定位的项
+            </summary>
+            <param name="key">列表键</param>
+            <param name="index">要移除的索引</param>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.RemoveListItem``1(System.String,System.Int32)">
+            <summary>
+            移除指定位的项
+            </summary>
+            <param name="key">列表键</param>
+            <param name="index">要移除的索引</param>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.GetListItem``1(System.String,System.Int32)">
+            <summary>
+            获取指定索引的列表项
+            </summary>
+            <param name="key">列表键</param>
+            <param name="index">项索引</param>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.GetList``1(System.String)">
+            <summary>
+            获取指定的列表
+            </summary>
+            <param name="key">列表键</param>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.ClearListItem(System.String)">
+            <summary>
+            清除指定的列表
+            </summary>
+            <param name="key">列表键</param>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.Increment(System.String)">
+            <summary>
+            对指定KEY值的数字加1
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.Decrement(System.String)">
+            <summary>
+            对指定KEY值的数字减1
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.Clear(System.Collections.Generic.ICollection{System.String})">
+            <summary>
+            清除指定的多个缓存项
+            </summary>
+            <param name="keyList">缓存键列表</param>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.ClearCache(System.Boolean)">
+            <summary>
+            清除当前连接会话内的所有数据
+            </summary>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.Dispose">
+            <summary>
+            释放缓存API资源
+            </summary>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheClient.Release">
+            <summary>
+            释放当前进程创建的所有Redis资源。
+            </summary>
+            <returns>返回还有多少个Redis资源未能及时释放</returns>
+        </member>
+        <member name="P:CYTX.Utility.Cache.RedisCacheClient.PrefixKey">
+            <summary>
+            返回缓存的前置KEY，最终的实际KEY由 前置KEY + 自定义KEY组成。
+            </summary>
+        </member>
+        <member name="P:CYTX.Utility.Cache.RedisCacheClient.Configuration">
+            <summary>
+            返回当前缓存的配置对象
+            </summary>
+        </member>
+        <member name="P:CYTX.Utility.Cache.RedisCacheClient.IsDisposed">
+            <summary>
+            返回本实例的资源是否已释放
+            </summary>
+        </member>
+        <member name="T:CYTX.Utility.Cache.RedisCacheStack`1">
+            <summary>
+            分布式栈，所有项存在缓存中。本类的所有成员是线程安全的。
+            </summary>
+            <typeparam name="T">项目类型</typeparam>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheStack`1.#ctor(CYTX.Utility.Cache.RedisCacheClient,System.String)">
+            <summary>
+            分布式栈，所有项存在缓存中。
+            </summary>
+            <param name="redis">Redis操作API</param>
+            <param name="key">栈每一项的KEY值</param>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheStack`1.Push(`0)">
+            <summary>
+            将指定的项压入栈底
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheStack`1.Pop">
+            <summary>
+            取出位于栈顶的项
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheStack`1.Peek">
+            <summary>
+            返回目前位于栈顶的项
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheStack`1.Clear">
+            <summary>
+            清除所有项
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheStack`1.PopAll">
+            <summary>
+            取出栈中的所有项！
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheStack`1.Dispose">
+            <summary>
+            释放资源
+            </summary>
+        </member>
+        <member name="P:CYTX.Utility.Cache.RedisCacheStack`1.RedisClient">
+            <summary>
+            返回REDIS缓存API对象！
+            </summary>
+        </member>
+        <member name="P:CYTX.Utility.Cache.RedisCacheStack`1.Count">
+            <summary>
+            返回堆栈内的项目数
+            </summary>
+        </member>
+        <member name="T:CYTX.Utility.Cache.RedisCacheQueue`1">
+            <summary>
+            分布式队列，所有项存在缓存中。本类的所有成员是线程安全的。
+            </summary>
+            <typeparam name="T">项目类型</typeparam>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheQueue`1.#ctor(CYTX.Utility.Cache.RedisCacheClient,System.String)">
+            <summary>
+            分布式队列，所有项存在缓存中。
+            </summary>
+            <param name="redis">Redis操作API</param>
+            <param name="key">栈每一项的KEY值</param>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheQueue`1.Enqueue(`0)">
+            <summary>
+            将指定的项存入队列
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheQueue`1.Dequeue">
+            <summary>
+            取出位于队头的项
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheQueue`1.Peek">
+            <summary>
+            返回目前位于队头的项
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheQueue`1.Remove">
+            <summary>
+            摘掉位于队头的项，不要它
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheQueue`1.Clear">
+            <summary>
+            清除所有项
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheQueue`1.DequeueAll">
+            <summary>
+            取出队列中的所有项！
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisCacheQueue`1.Dispose">
+            <summary>
+            释放资源
+            </summary>
+        </member>
+        <member name="P:CYTX.Utility.Cache.RedisCacheQueue`1.RedisClient">
+            <summary>
+            返回REDIS缓存API对象！
+            </summary>
+        </member>
+        <member name="P:CYTX.Utility.Cache.RedisCacheQueue`1.Count">
+            <summary>
+            返回队列内的项目数
+            </summary>
+        </member>
+        <member name="T:CYTX.Utility.Cache.RedisConfigInfo">
+            <summary>
+            Redis配置信息类文件
+            </summary>
+        </member>
+        <member name="M:CYTX.Utility.Cache.RedisConfigInfo.#ctor">
+            <summary>
+            Redis配置信息类文件
+            </summary>
+        </member>
+        <member name="P:CYTX.Utility.Cache.RedisConfigInfo.WriteServerList">
+            <summary>
+            返回/设置Redis写入服务器地址
+            </summary>
+        </member>
+        <member name="P:CYTX.Utility.Cache.RedisConfigInfo.ReadServerList">
+            <summary>
+            返回/设置Redis只读服务器地址
+            </summary>
+        </member>
+        <member name="P:CYTX.Utility.Cache.RedisConfigInfo.MaxWritePoolSize">
+            <summary>
+            返回/设置可同时写入缓存的最大写链接数（连接池大小）
+            </summary>
+        </member>
+        <member name="P:CYTX.Utility.Cache.RedisConfigInfo.MaxReadPoolSize">
+            <summary>
+            返回/设置可同时读取缓存的最大写链接数（连接池大小）
+            </summary>
+        </member>
+        <member name="P:CYTX.Utility.Cache.RedisConfigInfo.RetryCount">
+            <summary>
+            重试次数
+            </summary>
+        </member>
+        <member name="P:CYTX.Utility.Cache.RedisConfigInfo.RetryTimeout">
+            <summary>
+            每次重试超时时间（毫秒）
+            </summary>
+        </member>
+        <member name="P:CYTX.Utility.Cache.RedisConfigInfo.SendTimeout">
+            <summary>
+            发送超时时间（毫秒）
+            </summary>
+        </member>
+        <member name="P:CYTX.Utility.Cache.RedisConfigInfo.AutoStart">
+            <summary>
+            返回/设置Redis缓存是否允许自动重启
+            </summary>
+        </member>
+        <member name="P:CYTX.Utility.Cache.RedisConfigInfo.Default">
+            <summary>
+            返回当前的默认配置（读取自config文件）
+            </summary>
+        </member>
+    </members>
+</doc>

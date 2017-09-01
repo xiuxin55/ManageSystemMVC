@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+</head>
+<body>
+    @RenderBody()
+    @Scripts.Render("~/Scripts/jquery-1.11.3.min.js")
+    @Scripts.Render("~/Scripts/jQuery.md5.js")
+    @Scripts.Render("~/Scripts/jquery.cookie.js")
+    @Scripts.Render("~/Scripts/BigInt.js")
+    @Scripts.Render("~/Scripts/RSA.js")
+    @Scripts.Render("~/Scripts/Barrett.js")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    
+    @RenderSection("scripts", required: false)
+</body>
+</html>
